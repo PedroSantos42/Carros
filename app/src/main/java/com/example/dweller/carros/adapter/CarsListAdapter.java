@@ -5,9 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.dweller.carros.R;
 import com.example.dweller.carros.entities.Car;
+import com.example.dweller.carros.listener.OnListClickInteractionListener;
 import com.example.dweller.carros.viewholder.CarViewHolder;
 
 import java.util.List;
@@ -15,9 +15,11 @@ import java.util.List;
 public class CarsListAdapter extends RecyclerView.Adapter<CarViewHolder> {
 
     private List<Car> mListCars;
+    private OnListClickInteractionListener mOnListClickInteractionListener;
 
-    public CarsListAdapter(List<Car> cars) {
+    public CarsListAdapter(List<Car> cars, OnListClickInteractionListener listener) {
         this.mListCars = cars;
+        this.mOnListClickInteractionListener = listener;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarViewHolder> {
     @Override
     public void onBindViewHolder(CarViewHolder holder, int position) {
         Car car = this.mListCars.get(position);
-        holder.bindData(car);
+        holder.bindData(car, this.mOnListClickInteractionListener);
     }
 
     @Override
